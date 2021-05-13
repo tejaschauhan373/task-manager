@@ -8,7 +8,7 @@ const {sendWelcomeEmail, sendCancelationEmail} = require('../service/email_sendi
 const router = new express.Router()
 
 // To add User
-router.post('/user', async (req, res) => {
+router.post('/users', async (req, res) => {
     const user = new User(req.body)
 
     try {
@@ -22,7 +22,7 @@ router.post('/user', async (req, res) => {
 })
 
 // To login the User
-router.post('/user/login', async (req, res) => {
+router.post('/users/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -34,7 +34,7 @@ router.post('/user/login', async (req, res) => {
 })
 
 // To logout user
-router.post('/user/logout', auth, async (req, res) => {
+router.post('/users/logout', auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -59,7 +59,7 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 })
 
 // To get user profile details
-router.get('/user/me', auth, async (req, res) => {
+router.get('/users/me', auth, async (req, res) => {
     try {
         res.send(req.user)
     } catch (e) {
@@ -85,7 +85,7 @@ router.get('/users/:id', async (req, res) => {
 })
 
 // To update user profile details
-router.patch('/user/:id', auth, async (req, res) => {
+router.patch('/users/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password', 'age']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -111,7 +111,7 @@ router.patch('/user/:id', auth, async (req, res) => {
 })
 
 // To delete user profile
-router.delete('/user/me', auth, async (req, res) => {
+router.delete('/users/me', auth, async (req, res) => {
     try {
         await req.user.remove();
         sendCancelationEmail(req.user.email, req.user.name);
@@ -136,8 +136,7 @@ const upload = multer({
 
 // To upload user avatar or profile image
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
-    const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
-    req.user.avatar = buffer;
+    req.user.avatar = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer();
     await req.user.save();
     res.send();
     }, (error, req, res, next) => {
