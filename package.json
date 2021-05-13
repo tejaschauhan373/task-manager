@@ -5,6 +5,7 @@
   "main": "mongodb.js",
   "scripts": {
     "test": "node src/index.js",
+    "start": "node src/index.js",
     "dev": "env-cmd -f src/config/dev.env node src/index.js"
   },
   "keywords": [],
