@@ -7,8 +7,6 @@
 2. Security by encryption of user's details 
 3. CRUD operation on user and task
 
-<hr>
-
 ## Setup the Project
 
 1. Install NodeJS in your machine
@@ -58,7 +56,6 @@
 
        ├── `test` file for unit testing
 
-<hr>
 
 ## Run the Project
 
