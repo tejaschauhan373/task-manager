@@ -1,5 +1,4 @@
 # Task Manager APIs
-<hr>
 <br/>
 
 ## Feature
