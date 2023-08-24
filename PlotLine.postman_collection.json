@@ -1,13 +1,39 @@
 {
 	"info": {
-		"_postman_id": "625e2c6e-0e4a-4217-a69e-c8302b6fdde4",
-		"name": "task-manager",
+		"_postman_id": "27cdaf34-b354-49a8-85db-f2ad6df2af58",
+		"name": "PlotLine",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Users",
 			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"tc@gmail.com\",\n    \"name\":\"tc\",\n    \"password\":\"khkhkhjkhjkhkh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Login User",
 					"event": [
@@ -19,6 +45,15 @@
 									"    console.log(pm.response.json().token)",
 									"    pm.environment.set('authToken',pm.response.json().token)",
 									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -101,7 +136,7 @@
 					"response": []
 				},
 				{
-					"name": "Logout All",
+					"name": "Logout From All Sessions",
 					"event": [
 						{
 							"listen": "test",
@@ -253,32 +288,6 @@
 					"response": []
 				},
 				{
-					"name": "add user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\":\"tc@gmail.com\",\n    \"name\":\"tc\",\n    \"password\":\"khkhkhjkhjkhkh\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/users",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Read Profile",
 					"request": {
 						"method": "GET",
@@ -326,7 +335,7 @@
 					"response": []
 				},
 				{
-					"name": "get user profile picture",
+					"name": "Get User Profile Picture",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -374,7 +383,7 @@
 					"response": []
 				},
 				{
-					"name": "get avatar",
+					"name": "Get Avatar",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -395,16 +404,16 @@
 			]
 		},
 		{
-			"name": "Tasks",
+			"name": "product",
 			"item": [
 				{
-					"name": "add task",
+					"name": "Add Item In Main Menu",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\":\"Completed JS task\",\n    \"completed\":true\n}",
+							"raw": "{\n    \"name\":\"curd\",\n    \"description\": \"dairy item\",\n    \"price\": 40\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -412,60 +421,49 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tasks",
+							"raw": "{{url}}/product",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"tasks"
+								"product"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Read All Task",
+					"name": "Read All Items",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
-							"raw": "{{url}}/tasks",
+							"raw": "{{url}}/items",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"tasks"
+								"items"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Read Task",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/task/",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"task",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Modify Task",
+					"name": "Modify Item In Main Menu",
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\":\"tc\"\n}",
+							"raw": "{\n    \"name\": \"milk\",\n    \"description\":\"tc\",\n    \"price\": 55\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -473,20 +471,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tasks/60963392937bb12a3c8126b3",
+							"raw": "{{url}}/item/64e776cfdfde4a200cdb93f2",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"tasks",
-								"60963392937bb12a3c8126b3"
+								"item",
+								"64e776cfdfde4a200cdb93f2"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Task",
+					"name": "Delete Item From Main Menu",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -500,13 +498,143 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tasks/609e088ffcd78f4158163275",
+							"raw": "{{url}}/item/64e7a21c6a6db10edc48ebdb",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"tasks",
-								"609e088ffcd78f4158163275"
+								"item",
+								"64e7a21c6a6db10edc48ebdb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Get Cart Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cart",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item In Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"item\":\"64e7769ddfde4a200cdb93f1\",\n    \"quantity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cart/item/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart",
+								"item",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Place Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cart",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Item From Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"item\":\"64e776cfdfde4a200cdb93f2\",\n    \"quantity\": 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cart/item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"item\":\"64e776cfdfde4a200cdb93f2\",\n    \"quantity\": 9\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/cart/item",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cart",
+								"item"
 							]
 						}
 					},

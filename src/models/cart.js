@@ -1,19 +1,14 @@
 const mongoose = require('mongoose')
 
-const taskSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    completed: {
-        type: Boolean,
-        default: false
-    },
+const cartSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    ordered: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true
@@ -24,6 +19,6 @@ mongoose.connect(process.env.MONGODB_URL, {
     useCreateIndex: true
 })
 
-const Task = mongoose.model('Task', taskSchema)
+const Cart = mongoose.model('Cart', cartSchema)
 
-module.exports = Task
+module.exports = Cart
