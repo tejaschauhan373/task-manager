@@ -1,27 +1,26 @@
-# Task Manager APIs
+# Shopping APIs
 <br/>
 
 ## Feature
 
-1. User signup with mail notifications
+1. CRUD operation on items of main menu
 2. Security by encryption of user's details 
-3. CRUD operation on user and task
+3. CRUD operation on user and on items of cart
 
-## Setup the Project
+## Set up the Project
 
-1. Install NodeJS in your machine
+1. Install Node.js in your machine
 
 2. Install node modules
 
    ```
-   $ cd task-manager\
+   $ cd <Project Directory Name>\
    $ npm i
    ```
 
 3. set up config.json.
 
     * Make duplicate file of config/example.config.env by naming it config.env.
-    * Set send grid email API token in config.env after creating account on [sendgrid.com](https://app.sendgrid.com/)
     * Set other needed config environment
 
 5. Project structure
@@ -52,19 +51,17 @@
 
        ├── `router` containing files for APIs
 
-       ├── `service/email_sending,.js` file to send email
-
        ├── `test` file for unit testing
 
 
 ## Run the Project
 
-* Go to project (task-manager) directory in terminal and run the command
+* Go to project directory in terminal and run the command
 
    ```
    npm run start 
    ```
 
-  // will run on localhost:3000
+  // will run on [localhost:3000](localhost:3000)
 
 <hr>
