@@ -10,7 +10,7 @@ const userOne = {
     email: 'mike@example.com',
     password: '56what!!',
     tokens: [{
-        token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET)
+        token: jwt.sign({ _id: userOneId }, "done")
     }]
 }
 
@@ -21,7 +21,7 @@ const userTwo = {
     email: 'jess@example.com',
     password: 'myhouse099@@',
     tokens: [{
-        token: jwt.sign({ _id: userTwoId }, process.env.JWT_SECRET)
+        token: jwt.sign({ _id: userTwoId }, "done")
     }]
 }
 

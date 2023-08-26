@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./task')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -55,8 +54,8 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.virtual('tasks', {
-    ref: 'Task',
+userSchema.virtual('carts', {
+    ref: 'Cart',
     localField: '_id',
     foreignField: 'owner'
 })
@@ -74,7 +73,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET)
+    const token = jwt.sign({_id: user._id.toString()}, "done")
 
     user.tokens = user.tokens.concat({token})
     await user.save()
@@ -83,9 +82,10 @@ userSchema.methods.generateAuthToken = async function () {
 }
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email})
+    const user = await User.findOne({email: email})
 
     if (!user) {
+        console.log(user);
         throw new Error('Unable to login')
     }
 
@@ -110,13 +110,13 @@ userSchema.pre('save', async function (next) {
 })
 
 // Delete user tasks when user is removed
-userSchema.pre('remove', async function (next) {
-    const user = this
-    await Task.deleteMany({owner: user._id})
-    next()
-})
+// userSchema.pre('remove', async function (next) {
+//     const user = this
+//     await Task.deleteMany({owner: user._id})
+//     next()
+// })
 
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect("mongodb://127.0.0.1:27017/shop", {
     useNewUrlParser: true,
     useCreateIndex: true
 })
