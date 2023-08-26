@@ -66,11 +66,11 @@ router.delete('/cart/item', auth, async (req, res) => {
 router.get('/cart', auth, async (req, res) => {
     try {
         const itemRefs = await CartDetail.find({cart: req.cart._id}).populate("item").exec()
-        const docs = Array.from(itemRefs.map(o => o.toObject()));
-        let totalBill = 0;
-        docs.forEach((item_lot) => totalBill += item_lot.quantity * (item_lot.item.price + item_lot.item.tax))
+        const docs= Array.from(itemRefs.map(o => o.toObject()));
+        let totalBill =  0;
+        docs.forEach((item_lot) =>totalBill += item_lot.quantity*(item_lot.item.price + item_lot.item.tax))
         const obj = {
-            "items": itemRefs,
+            "items" : itemRefs,
             "totalBill": totalBill
         }
         res.send(obj);
@@ -111,7 +111,7 @@ router.delete('/cart/:id', auth, async (req, res) => {
         if (summary.deletedCount === 0) {
             res.status(404).send("Cart is already empty!")
         }
-        res.send(summary)
+        res.send(items)
     } catch (e) {
         res.status(500).send()
     }

@@ -14,7 +14,7 @@ const cartSchema = new mongoose.Schema({
     timestamps: true
 })
 
-mongoose.connect(process.env.MONGODB_URL, {
+mongoose.connect("mongodb://127.0.0.1:27017/shop", {
     useNewUrlParser: true,
     useCreateIndex: true
 })
