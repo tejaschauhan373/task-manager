@@ -111,7 +111,7 @@ router.delete('/cart/:id', auth, async (req, res) => {
         if (summary.deletedCount === 0) {
             res.status(404).send("Cart is already empty!")
         }
-        res.send(items)
+        res.send("cleared the cart");
     } catch (e) {
         res.status(500).send()
     }
