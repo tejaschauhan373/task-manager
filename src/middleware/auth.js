@@ -16,13 +16,14 @@ const auth = async (req, res, next) => {
         req.user = user
         if(!req.cart){
             const cart = await Cart.findOne({ordered: false}, {}, { sort: { 'created_at' : -1 } })
+            req.cart = cart; // get empty cart at entrance of mart
             if(!cart) {
                 const cart = new Cart({
                     owner: req.user._id,
                 })
                 await cart.save()
+                req.cart = cart; // get empty cart at entrance of mart
             }
-            req.cart = cart; // get empty cart at entrance of mart
         }
         next()
     } catch (e) {
